@@ -35,6 +35,21 @@ void searchStudent(const std::vector<Student>& students) {
     }
     std::cout << "Student not found" << std::endl;
 }
+void updateStudent(std::vector<Student>& students) {
+    int id;
+    std::cout << "Enter ID to update: ";
+    std::cin >> id;
+
+    for (Student& s : students) {
+        if(s.id == id){
+            std::cout<<"Enter new mark: ";
+            std::cin>>s.marks;
+            std::cout<<s.id<<"--"<<s.name<<"--"<<s.marks<<std::endl;
+            return ;
+        }
+    }
+    std::cout << "Student not found" << std::endl;
+}
 int main() {
     std::vector<Student> students;
     students.push_back({1, "Ram", 64.5});
@@ -42,7 +57,7 @@ int main() {
     students.push_back({3, "Ravi", 85.5});
     int choice;
     do{
-        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n0. Exit\nEnter choice: ";
+        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n0. Exit\nEnter choice: ";
         std::cin>>choice;
         if(choice == 1){
              std::cout<<"Student details :"<<std::endl;
@@ -53,6 +68,9 @@ int main() {
         }
         if(choice == 3){
             searchStudent(students);
+        }
+        if(choice == 4){
+            updateStudent(students);
         }
     }while(choice != 0);
     
