@@ -50,6 +50,20 @@ void updateStudent(std::vector<Student>& students) {
     }
     std::cout << "Student not found" << std::endl;
 }
+void deleteStudent(std::vector<Student>& students) {
+    int id;
+    std::cout << "Enter ID to delete: ";
+    std::cin >> id;
+
+    for (size_t i = 0; i < students.size(); i++) {
+        if(students[i].id == id){
+            students.erase(students.begin() + i);
+            std::cout<<"Student deleted"<<std::endl;
+            return;
+        }
+    }
+    std::cout << "Student not found" << std::endl;
+}
 int main() {
     std::vector<Student> students;
     students.push_back({1, "Ram", 64.5});
@@ -57,7 +71,7 @@ int main() {
     students.push_back({3, "Ravi", 85.5});
     int choice;
     do{
-        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n0. Exit\nEnter choice: ";
+        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n5. Delete a student\n0. Exit\nEnter choice: ";
         std::cin>>choice;
         if(choice == 1){
              std::cout<<"Student details :"<<std::endl;
@@ -71,6 +85,9 @@ int main() {
         }
         if(choice == 4){
             updateStudent(students);
+        }
+        if(choice == 5){
+            deleteStudent(students);
         }
     }while(choice != 0);
     
