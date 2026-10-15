@@ -12,6 +12,16 @@ void showStudents(const std::vector<Student> &students){
         std::cout<<s.id<<"--"<<s.name<<"--"<<s.marks<<std::endl;
     }
 }
+void addStudent(std::vector<Student>& students) {
+    Student s;
+    std::cout << "Enter ID: ";
+    std::cin >> s.id;
+    std::cout<<"Enter name: ";
+    std::getline(std::cin>>std::ws, s.name);
+    std::cout<<"Enter marks: ";
+    std::cin>>s.marks;
+    students.push_back(s);
+}
 int main() {
     std::vector<Student> students;
     students.push_back({1, "Ram", 64.5});
@@ -19,11 +29,14 @@ int main() {
     students.push_back({3, "Ravi", 85.5});
     int choice;
     do{
-        std::cout<<"\n1. Show students\n0. Exit\nEnter choice: ";
+        std::cout<<"\n1. Show students\n2. Add student\n0. Exit\nEnter choice: ";
         std::cin>>choice;
         if(choice == 1){
              std::cout<<"Student details :"<<std::endl;
              showStudents(students);
+        }
+        if(choice == 2){
+            addStudent(students);
         }
     }while(choice != 0);
     
