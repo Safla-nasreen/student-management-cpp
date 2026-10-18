@@ -39,6 +39,14 @@ void searchStudent(const std::vector<Student>& students) {
     }
 
 }
+void sortBymarks(std::vector<Student>& students){
+    auto higherMarks = [](const Student& a, const Student& b){
+        return a.marks > b.marks;
+
+    };
+    std::sort(students.begin(), students.end(), higherMarks);
+    std::cout<<"Sorted by marks" << std::endl;
+}
 void updateStudent(std::vector<Student>& students) {
     int id;
     std::cout << "Enter ID to update: ";
@@ -75,7 +83,7 @@ int main() {
     students.push_back({3, "Ravi", 85.5});
     int choice;
     do{
-        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n5. Delete a student\n0. Exit\nEnter choice: ";
+        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n5. Delete a student\n6. Sort by marks\n0. Exit\nEnter choice: ";
         std::cin>>choice;
         if(choice == 1){
              std::cout<<"Student details :"<<std::endl;
@@ -92,6 +100,9 @@ int main() {
         }
         if(choice == 5){
             deleteStudent(students);
+        }
+        if(choice == 6){
+            sortBymarks(students);
         }
     }while(choice != 0);
     
