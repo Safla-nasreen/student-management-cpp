@@ -47,6 +47,22 @@ void searchStudent(const std::vector<Student>& students) {
    }
 
 }
+
+void checkResult(const std::vector<Student>& students) {
+    int id;
+    std::cout<<"Enter ID to check: ";
+    std::cin>>id;
+
+    auto result = findStudent(students, id);
+
+    if(! result){
+        std::cout<<"Student not found\n";
+    }else if(result->marks >= 40){
+        std::cout<<result->name<<" passed\n";
+    }else{
+        std::cout<<result->name<<" failed\n";
+    }
+}
 void sortBymarks(std::vector<Student>& students){
     auto higherMarks = [](const Student& a, const Student& b){
         return a.marks > b.marks;
@@ -91,7 +107,7 @@ int main() {
     students.push_back({3, "Ravi", 85.5});
     int choice;
     do{
-        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n5. Delete a student\n6. Sort by marks\n0. Exit\nEnter choice: ";
+        std::cout<<"\n1. Show students\n2. Add student\n3. Search student\n4. Update student's mark\n5. Delete a student\n6. Sort by marks\n7. Check the result\n0. Exit\nEnter choice: ";
         std::cin>>choice;
         if(choice == 1){
              std::cout<<"Student details :"<<std::endl;
@@ -111,6 +127,9 @@ int main() {
         }
         if(choice == 6){
             sortBymarks(students);
+        }
+        if(choice == 7){
+            checkResult(students);
         }
     }while(choice != 0);
     
