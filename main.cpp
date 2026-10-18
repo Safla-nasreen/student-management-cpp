@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 struct Student {
     int id;
@@ -26,14 +27,17 @@ void searchStudent(const std::vector<Student>& students) {
     int id;
     std::cout << "Enter ID to search: ";
     std::cin >> id;
+    auto matchId = [id](const Student& s){
+        return s.id == id;
+    };
 
-    for (const Student& s : students) {
-        if(s.id == id){
-            std::cout<<s.id<<"--"<<s.name<<"--"<<s.marks<<std::endl;
-            return ;
-        }
+    auto it = std::find_if(students.begin(), students.end(), matchId);
+    if(it == students.end()){
+        std::cout<<"Student not found\n";
+    }else {
+    std::cout << it->id << "--" << it->name << "--" << it->marks << std::endl;
     }
-    std::cout << "Student not found" << std::endl;
+
 }
 void updateStudent(std::vector<Student>& students) {
     int id;
