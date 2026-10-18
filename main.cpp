@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include<optional>
 
 struct Student {
     int id;
@@ -23,20 +24,27 @@ void addStudent(std::vector<Student>& students) {
     std::cin>>s.marks;
     students.push_back(s);
 }
+std::optional<Student> findStudent(const std::vector<Student>& students, int id){
+    auto matchId = [id](const Student& s){return s.id == id; };
+    auto it = std::find_if(students.begin(), students.end(), matchId);
+
+    if(it == students.end()){
+        return std::nullopt;
+    }
+    return *it;
+}
+
 void searchStudent(const std::vector<Student>& students) {
     int id;
     std::cout << "Enter ID to search: ";
     std::cin >> id;
-    auto matchId = [id](const Student& s){
-        return s.id == id;
-    };
-
-    auto it = std::find_if(students.begin(), students.end(), matchId);
-    if(it == students.end()){
-        std::cout<<"Student not found\n";
-    }else {
-    std::cout << it->id << "--" << it->name << "--" << it->marks << std::endl;
-    }
+   auto result = findStudent(students, id);
+   
+   if(result){
+    std::cout<<result->id<<"--"<<result->name<<"--"<<result->marks<<std::endl;
+   }else{
+    std::cout<<"Student not found\n";
+   }
 
 }
 void sortBymarks(std::vector<Student>& students){
