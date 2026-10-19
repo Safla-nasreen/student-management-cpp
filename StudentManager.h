@@ -17,8 +17,9 @@ class StudentManager
 private:
     std::vector<Student> students;
 
-    std::optional<Student> findStudent(int id);
+    //std::optional<Student> findStudent(int id);
 public:
+    std::optional<Student> findStudent(int id);
     StudentManager();
     void showStudents();
     void addStudent();
