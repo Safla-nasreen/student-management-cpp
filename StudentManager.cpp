@@ -119,3 +119,6 @@ void StudentManager::deleteStudent()
     }
     std::cout << "Student not found" << std::endl;
 }
+const std::vector<Student> &StudentManager::getStudents() const{
+        return students;
+}

@@ -28,4 +28,5 @@ public:
     void sortBymarks();
     void updateStudent();
     void deleteStudent();
+    const std::vector<Student>& getStudents() const;
 };
