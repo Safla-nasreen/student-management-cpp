@@ -29,4 +29,5 @@ public:
     void updateStudent();
     void deleteStudent();
     const std::vector<Student>& getStudents() const;
+    void addStudent(const Student& s);
 };

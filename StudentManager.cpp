@@ -122,3 +122,6 @@ void StudentManager::deleteStudent()
 const std::vector<Student> &StudentManager::getStudents() const{
         return students;
 }
+void StudentManager::addStudent(const Student& s){
+    students.push_back(s);
+}
