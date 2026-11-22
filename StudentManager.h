@@ -31,4 +31,6 @@ public:
     const std::vector<Student>& getStudents() const;
     void addStudent(const Student& s);
     void deleteStudent(int id);
+    void saveToFile() const;
+    void loadFromFile();
 };
