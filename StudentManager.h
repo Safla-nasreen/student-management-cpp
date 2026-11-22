@@ -10,6 +10,7 @@ struct Student
     int id;
     std::string name;
     double marks;
+    bool deleted = false;
 };
 
 class StudentManager
@@ -28,4 +29,11 @@ public:
     void sortBymarks();
     void updateStudent();
     void deleteStudent();
+    const std::vector<Student>& getStudents() const;
+    void addStudent(const Student& s);
+    void deleteStudent(int id);
+    void saveToFile() const;
+    void loadFromFile();
+    void restoreStudent(int id);
+    bool idExist(int id) const;
 };

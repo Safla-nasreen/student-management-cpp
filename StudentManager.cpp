@@ -1,10 +1,14 @@
+#include<fstream>
 #include "StudentManager.h"
 
 StudentManager::StudentManager()
 {
-    students.push_back({1, "Ram", 64.5});
-    students.push_back({2, "Anu", 72.0});
-    students.push_back({3, "Ravi", 85.5});
+    loadFromFile();
+    if(students.empty()){
+        students.push_back({1, "Ram", 64.5});
+        students.push_back({2, "Anu", 72.0});
+        students.push_back({3, "Ravi", 85.5});
+    }
 }
 
 std::optional<Student> StudentManager::findStudent(int id)
@@ -119,3 +123,52 @@ void StudentManager::deleteStudent()
     }
     std::cout << "Student not found" << std::endl;
 }
+const std::vector<Student> &StudentManager::getStudents() const{
+        return students;
+}
+void StudentManager::addStudent(const Student& s){
+    students.push_back(s);
+    saveToFile();
+}
+void StudentManager::deleteStudent(int id){
+    for (size_t i = 0; i < students.size(); i++)
+    {
+        if (students[i].id == id)
+        {
+            students[i].deleted = true; 
+            saveToFile();
+            return;
+        }
+    }
+}
+void StudentManager::restoreStudent(int id){
+    for (size_t i = 0; i < students.size(); i++)
+    {
+        if (students[i].id == id)
+        {
+            students[i].deleted = false; 
+            saveToFile();
+            return;
+        }
+    }
+}
+void StudentManager::saveToFile() const{
+    std::ofstream file("students.txt");
+    for(const Student& s: students){
+        file<<s.id<<" "<<s.name<<" "<<s.marks<<" "<<s.deleted<<std::endl;
+    }
+}
+void StudentManager::loadFromFile(){
+    std::ifstream file("students.txt");
+    Student s;
+    while(file>>s.id>>s.name>>s.marks>>s.deleted){
+            students.push_back(s);
+        }
+}
+ bool StudentManager::idExist(int id) const{
+    for(const Student &s: students){
+        if(s.id == id)
+            return true;
+    }
+    return false;
+ }
