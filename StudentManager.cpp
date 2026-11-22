@@ -141,6 +141,17 @@ void StudentManager::deleteStudent(int id){
         }
     }
 }
+void StudentManager::restoreStudent(int id){
+    for (size_t i = 0; i < students.size(); i++)
+    {
+        if (students[i].id == id)
+        {
+            students[i].deleted = false; 
+            saveToFile();
+            return;
+        }
+    }
+}
 void StudentManager::saveToFile() const{
     std::ofstream file("students.txt");
     for(const Student& s: students){

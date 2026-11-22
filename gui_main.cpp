@@ -15,6 +15,7 @@ int main(int argc, char*argv[]){
     QPushButton addButton("Add Student");
     QPushButton okButton("Ok");
     QPushButton deleteButton("Delete");
+    QPushButton restoreButton("Restore");
     QLineEdit idBox, nameBox, marksBox;
     idBox.setPlaceholderText("ID"); 
     nameBox.setPlaceholderText("Name");
@@ -27,6 +28,7 @@ int main(int argc, char*argv[]){
     layout.addWidget(&marksBox);
     layout.addWidget(&okButton);
     layout.addWidget(&deleteButton);
+    layout.addWidget(&restoreButton);
 
     for(const Student &s: manager.getStudents()){
         QString Line = QString::number(s.id)+" "+QString::fromStdString(s.name)+" "+QString::number(s.marks);
@@ -89,6 +91,18 @@ int main(int argc, char*argv[]){
         QListWidgetItem* item = studentsList.item(row);
         QFont font = item -> font();
         font.setStrikeOut(true);
+        item -> setFont(font);
+    });
+
+    QObject::connect(&restoreButton, &QPushButton::clicked, [&]{
+        int row = studentsList.currentRow();
+        if(row<0)
+            return;
+        int id = manager.getStudents()[row].id;
+        manager.restoreStudent(id);
+        QListWidgetItem* item = studentsList.item(row);
+        QFont font = item -> font();
+        font.setStrikeOut(false);
         item -> setFont(font);
     });
   

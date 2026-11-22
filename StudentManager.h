@@ -34,4 +34,5 @@ public:
     void deleteStudent(int id);
     void saveToFile() const;
     void loadFromFile();
+    void restoreStudent(int id);
 };
