@@ -165,3 +165,10 @@ void StudentManager::loadFromFile(){
             students.push_back(s);
         }
 }
+ bool StudentManager::idExist(int id) const{
+    for(const Student &s: students){
+        if(s.id == id)
+            return true;
+    }
+    return false;
+ }

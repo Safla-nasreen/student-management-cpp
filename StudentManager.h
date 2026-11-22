@@ -35,4 +35,5 @@ public:
     void saveToFile() const;
     void loadFromFile();
     void restoreStudent(int id);
+    bool idExist(int id) const;
 };

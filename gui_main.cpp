@@ -4,6 +4,7 @@
 #include<QListWidget>
 #include<QLineEdit>
 #include<QPushButton>
+#include<QMessageBox>
 #include "StudentManager.h"
 
 int main(int argc, char*argv[]){
@@ -45,6 +46,11 @@ int main(int argc, char*argv[]){
     QObject::connect(&okButton, &QPushButton::clicked, [&](){
         if(nameBox.text().isEmpty()||idBox.text().isEmpty())
             return;
+        if(manager.idExist(idBox.text().toInt())){
+            QMessageBox::warning(&window, "ID already used", "This ID belongs to another student. Please use a new ID.");
+            return;
+        }
+    
         Student s{ idBox.text().toInt(), nameBox.text().toStdString(), marksBox.text().toDouble() };
         manager.addStudent(s);
         QString Line = QString::number(s.id)+" "+QString::fromStdString(s.name)+" "+QString::number(s.marks);
