@@ -10,6 +10,7 @@ struct Student
     int id;
     std::string name;
     double marks;
+    bool deleted = false;
 };
 
 class StudentManager

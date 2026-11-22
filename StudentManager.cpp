@@ -135,7 +135,7 @@ void StudentManager::deleteStudent(int id){
     {
         if (students[i].id == id)
         {
-            students.erase(students.begin() + i);
+            students[i].deleted = true; 
             saveToFile();
             return;
         }
@@ -144,13 +144,13 @@ void StudentManager::deleteStudent(int id){
 void StudentManager::saveToFile() const{
     std::ofstream file("students.txt");
     for(const Student& s: students){
-        file<<s.id<<" "<<s.name<<" "<<s.marks<<std::endl;
+        file<<s.id<<" "<<s.name<<" "<<s.marks<<" "<<s.deleted<<std::endl;
     }
 }
 void StudentManager::loadFromFile(){
     std::ifstream file("students.txt");
     Student s;
-    while(file>>s.id>>s.name>>s.marks){
+    while(file>>s.id>>s.name>>s.marks>>s.deleted){
             students.push_back(s);
         }
 }

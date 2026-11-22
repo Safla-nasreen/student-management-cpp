@@ -31,6 +31,13 @@ int main(int argc, char*argv[]){
     for(const Student &s: manager.getStudents()){
         QString Line = QString::number(s.id)+" "+QString::fromStdString(s.name)+" "+QString::number(s.marks);
         studentsList.addItem(Line);
+
+        if(s.deleted){
+            QListWidgetItem* item = studentsList.item(studentsList.count() - 1);
+            QFont font = item -> font();
+            font.setStrikeOut(true);
+            item -> setFont(font);
+        }
     }
 
     QObject::connect(&okButton, &QPushButton::clicked, [&](){
@@ -40,6 +47,7 @@ int main(int argc, char*argv[]){
         manager.addStudent(s);
         QString Line = QString::number(s.id)+" "+QString::fromStdString(s.name)+" "+QString::number(s.marks);
         studentsList.addItem(Line);
+        
         idBox.clear();
         nameBox.clear(); 
         marksBox.clear();
@@ -78,7 +86,10 @@ int main(int argc, char*argv[]){
             return;
         int id = manager.getStudents()[row].id;
         manager.deleteStudent(id);
-        delete studentsList.takeItem(row);
+        QListWidgetItem* item = studentsList.item(row);
+        QFont font = item -> font();
+        font.setStrikeOut(true);
+        item -> setFont(font);
     });
   
     window.show();
