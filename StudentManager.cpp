@@ -125,3 +125,13 @@ const std::vector<Student> &StudentManager::getStudents() const{
 void StudentManager::addStudent(const Student& s){
     students.push_back(s);
 }
+void StudentManager::deleteStudent(int id){
+    for (size_t i = 0; i < students.size(); i++)
+    {
+        if (students[i].id == id)
+        {
+            students.erase(students.begin() + i);
+            return;
+        }
+    }
+}

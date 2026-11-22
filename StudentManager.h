@@ -30,4 +30,5 @@ public:
     void deleteStudent();
     const std::vector<Student>& getStudents() const;
     void addStudent(const Student& s);
+    void deleteStudent(int id);
 };
